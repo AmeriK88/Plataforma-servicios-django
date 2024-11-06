@@ -1,16 +1,44 @@
-<!-- templates/users/edit_profile.html -->
 {% extends 'base.html' %}
 
 {% block title %}Editar Perfil{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1>Editar Perfil</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        <a href="{% url 'profile' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+<div class="container mt-5">
+    <!-- Encabezado del formulario -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary">Editar Perfil</h1>
+        <p class="lead text-muted">Actualiza tu información personal y detalles de contacto.</p>
+    </div>
+
+    <!-- Formulario de Edición de Perfil -->
+    <div class="card shadow-sm p-5">
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Campos del Formulario -->
+            <div class="form-group mb-4">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="form-group mb-4">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="form-group mb-4">
+                {{ form.phone_number.label_tag }}
+                {{ form.phone_number }}
+            </div>
+            <div class="form-group mb-4">
+                {{ form.address.label_tag }}
+                {{ form.address }}
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary w-100">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

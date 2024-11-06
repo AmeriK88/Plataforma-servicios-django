@@ -1,14 +1,21 @@
-<!-- templates/users/login.html -->
 {% extends 'base.html' %}
 
 {% block title %}Iniciar Sesión{% endblock %}
 
 {% block content %}
-<h2>Iniciar Sesión</h2>
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Ingresar</button>
-</form>
-<p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a></p>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-primary mb-4">Inicia Sesión</h1>
+        <p class="lead text-muted">Accede a tu cuenta y gestiona tus servicios.</p>
+    </div>
+
+    <div class="card shadow-sm mt-4 p-4">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg w-100">Ingresar</button>
+        </form>
+        <p class="text-center mt-3">¿No tienes una cuenta? <a href="{% url 'register' %}" class="text-primary">Regístrate aquí</a></p>
+    </div>
+</div>
 {% endblock %}

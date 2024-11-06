@@ -3,24 +3,26 @@
 {% block title %}Perfil de Cliente{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Perfil de Cliente</h1>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-primary mb-4">Mi Perfil</h1>
+        <p class="lead text-muted">Consulta y gestiona tus datos personales y reservas.</p>
+    </div>
 
-    <div class="card mb-3">
+    <div class="card shadow-sm mt-4">
         <div class="card-body">
-            <h3>{{ user.username }}</h3>
+            <h3 class="card-title">{{ user.username }}</h3>
             <p><strong>Email:</strong> {{ user.email }}</p>
-
-            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
-            <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-2">Ir al Dashboard</a>
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary mt-3">Editar Perfil</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Ir al Dashboard</a>
         </div>
     </div>
 
-    <h2>Historial de Reservas</h2>
+    <h2 class="section-title text-secondary mt-5">Historial de Reservas</h2>
     <ul class="list-group mb-3">
-        {% for booking in user.client_bookings.all %}
+        {% for booking in past_bookings %}
             <li class="list-group-item">
-                <h5>Servicio: {{ booking.service.name }}</h5>
+                <h5 class="text-primary">Servicio: {{ booking.service.name }}</h5>
                 <p><strong>Fecha:</strong> {{ booking.date }}</p>
                 <p><strong>Empresa:</strong> {{ booking.service.provider.username }}</p>
             </li>

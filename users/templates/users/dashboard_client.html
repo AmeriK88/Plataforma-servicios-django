@@ -3,20 +3,22 @@
 {% block title %}Dashboard de Cliente{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Dashboard de Cliente</h1>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-primary mb-4">Bienvenido a tu Dashboard</h1>
+        <p class="lead text-muted">Revisa tus citas activas y servicios recomendados.</p>
+    </div>
 
-    <h2>Mis Reservas Activas</h2>
-    <div class="row mb-3">
+    <h2 class="section-title text-secondary">Mis Reservas Activas</h2>
+    <div class="row">
         {% for booking in active_bookings %}
             <div class="col-md-4">
-                <div class="card shadow-sm mb-3">
+                <div class="card shadow-sm mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">{{ booking.service.name }}</h5>
+                        <h5 class="card-title text-primary">{{ booking.service.name }}</h5>
                         <p><strong>Empresa:</strong> {{ booking.service.provider.username }}</p>
                         <p><strong>Fecha:</strong> {{ booking.date }}</p>
-                        <p><strong>Estado:</strong> {{ booking.status }}</p>
-                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-primary btn-sm mt-2">Ver Detalle</a>
+                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-outline-primary btn-sm mt-2">Ver Detalle</a>
                     </div>
                 </div>
             </div>
@@ -27,14 +29,13 @@
         {% endfor %}
     </div>
 
-
-    <h2>Servicios Recomendados</h2>
+    <h2 class="section-title text-secondary mt-5">Servicios Recomendados</h2>
     <ul class="list-group mb-3">
         {% for service in recommended_services %}
             <li class="list-group-item">
-                <h5>{{ service.name }}</h5>
+                <h5 class="text-primary">{{ service.name }}</h5>
                 <p>{{ service.description|truncatewords:20 }}</p>
-                <a href="{% url 'service_detail' service.id %}" class="btn btn-primary btn-sm">Ver Servicio</a>
+                <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary btn-sm">Ver Servicio</a>
             </li>
         {% empty %}
             <li class="list-group-item">No hay servicios recomendados en este momento.</li>

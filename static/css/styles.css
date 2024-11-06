@@ -1,9 +1,8 @@
-/* Archivo: static/css/styles.css */
-
 /* Fuentes y Colores */
 body {
     font-family: 'Roboto', sans-serif;
     color: #333;
+    background-color: #f5f7fa;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,19 +40,38 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
 /* Secciones y Tarjetas */
 .container {
     max-width: 1200px;
 }
 
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 .card {
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card-title {
@@ -61,8 +79,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
+.card-text {
+    color: #555;
+}
+
 /* Formularios */
-input[type="text"], input[type="email"], input[type="password"], select, textarea {
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], select, textarea {
     border-radius: 5px;
     border: 1px solid #ced4da;
     padding: 0.5rem;
@@ -113,4 +135,99 @@ footer p {
 /* Animaciones */
 .btn, .card, input, select, textarea {
     transition: all 0.3s ease;
+}
+
+/* Personalización de Listados */
+.list-group-item {
+    border: none;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Estilo de Encabezados y Subtítulos */
+.header-title {
+    color: #333;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.subheader-title {
+    color: #6c757d;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* Formularios Personalizados */
+.form-group label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    border-radius: 5px;
+}
+
+.form-group .btn {
+    width: 100%;
+}
+
+/* Añadir Sombras y Efectos a las Tarjetas */
+.shadow-sm {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Espaciado entre Tarjetas y Contenedores */
+.card + .card, .list-group-item + .list-group-item {
+    margin-top: 1rem;
+}
+
+.container.mt-4, .container.mt-5 {
+    margin-top: 2rem !important;
+}
+
+/* Estilos Adicionales para Formatos de Tarjeta */
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: none;
+}
+
+/* Botones con Efectos de Hover */
+.btn-primary:hover, .btn-success:hover, .btn-secondary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Alinear Textos de Formulario */
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], select, textarea {
+    width: 100%;
+}
+
+/* Estilo de Alertas */
+.alert {
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.alert-info {
+    background-color: #e9f5ff;
+    color: #31708f;
+    border-color: #bce8f1;
 }

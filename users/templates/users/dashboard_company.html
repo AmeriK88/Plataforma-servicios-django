@@ -1,24 +1,41 @@
-<!-- templates/users/dashboard_company.html -->
 {% extends 'base.html' %}
 
 {% block title %}Dashboard de Empresa{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Dashboard de Empresa</h1>
+<div class="container mt-5">
+    <!-- Título del Dashboard -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary">Dashboard de Empresa</h1>
+        <p class="lead text-muted">Gestiona tus reservas y servicios de forma eficiente.</p>
+    </div>
 
-    <h2>Reservas Pendientes</h2>
-    <ul class="list-group mb-3">
-        {% for booking in pending_bookings %}
-            <li class="list-group-item">
-                <h5>Cliente: {{ booking.user.username }}</h5>
-                <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
-                <p><strong>Fecha:</strong> {{ booking.date }}</p>
-                <a href="{% url 'confirm_booking' booking.id %}" class="btn btn-success btn-sm">Confirmar</a>
-            </li>
-        {% empty %}
-            <li class="list-group-item">No tienes reservas pendientes.</li>
-        {% endfor %}
-    </ul>
+    <!-- Sección de Reservas Pendientes -->
+    <section class="mb-5">
+        <h2 class="text-secondary mb-4">Reservas Pendientes</h2>
+        <div class="row">
+            {% for booking in pending_bookings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Cliente: {{ booking.user.username }}</h5>
+                            <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
+                            <p><strong>Fecha:</strong> {{ booking.date|date:"d M Y - H:i" }}</p>
+                            <a href="{% url 'confirm_booking' booking.id %}" class="btn btn-success btn-block mt-3">Confirmar</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No tienes reservas pendientes.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Botón para Agregar Nuevo Servicio -->
+    <div class="text-center">
+        <a href="{% url 'service_create' %}" class="btn btn-outline-primary btn-lg">Añadir Nuevo Servicio</a>
+    </div>
 </div>
 {% endblock %}

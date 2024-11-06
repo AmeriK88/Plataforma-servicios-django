@@ -1,14 +1,21 @@
-<!-- templates/users/register.html -->
 {% extends 'base.html' %}
 
 {% block title %}Registro{% endblock %}
 
 {% block content %}
-<h2>Registro</h2>
-<form method="post" action="{% url 'register' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
-</form>
-<p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-primary mb-4">Crea una Cuenta</h1>
+        <p class="lead text-muted">Únete a Next-Service y accede a los mejores servicios.</p>
+    </div>
+    
+    <div class="card shadow-sm mt-4 p-4">
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg w-100">Registrarse</button>
+        </form>
+        <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="{% url 'login' %}" class="text-primary">Inicia sesión aquí</a></p>
+    </div>
+</div>
 {% endblock %}
