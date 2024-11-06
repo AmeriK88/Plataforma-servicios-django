@@ -5,7 +5,9 @@
 {% block content %}
 <div class="container mt-5">
     <!-- Título de la Página -->
-    <h1 class="text-center display-4 text-primary mb-4">Lista de Servicios</h1>
+    <h1 class="text-center display-4 text-primary mb-4">
+        <i class="fas fa-list-alt"></i> Lista de Servicios
+    </h1>
 
     <!-- Listado de Servicios -->
     <div class="row">
@@ -14,19 +16,24 @@
                 <div class="card h-100 shadow-lg border-0">
                     <div class="card-body">
                         <h5 class="card-title text-primary">
+                            <i class="fas fa-concierge-bell"></i>
                             <a href="{% url 'service_detail' service.id %}" class="text-decoration-none">{{ service.name }}</a>
                         </h5>
                         <p class="card-text text-muted">{{ service.description|truncatewords:20 }}</p>
-                        <p class="font-weight-bold text-secondary">Precio: {{ service.price }} €</p>
+                        <p class="font-weight-bold text-secondary">
+                            <i class="fas fa-euro-sign"></i> Precio: {{ service.price }} €
+                        </p>
                     </div>
                     <div class="card-footer bg-transparent border-0 text-center">
-                        <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary">Ver Detalles</a>
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary">
+                            <i class="fas fa-info-circle"></i> Ver Detalles
+                        </a>
                     </div>
                 </div>
             </div>
         {% empty %}
             <div class="col-12">
-                <p class="text-center text-muted">No hay servicios disponibles en este momento.</p>
+                <p class="text-center text-muted"><i class="fas fa-exclamation-circle"></i> No hay servicios disponibles en este momento.</p>
             </div>
         {% endfor %}
     </div>

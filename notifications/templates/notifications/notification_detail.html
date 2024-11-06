@@ -1,15 +1,14 @@
-<!-- templates/notifications/notification_detail.html -->
 {% extends 'base.html' %}
 
 {% block title %}Detalle de Notificación{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="display-4 text-primary mb-4">Detalle de Notificación</h1>
+    <h1 class="display-4 text-primary mb-4"><i class="fas fa-bell"></i> Detalle de Notificación</h1>
     <div class="card shadow-sm p-4">
-        <p><strong>Mensaje:</strong> {{ notification.message }}</p>
-        <p><strong>Estado:</strong> {{ "Leído" if notification.is_read else "No leído" }}</p>
-        <a href="{% url 'notification_list' %}" class="btn btn-secondary mt-3">Volver a Notificaciones</a>
+        <p><strong><i class="fas fa-info-circle"></i> Mensaje:</strong> {{ notification.message }}</p>
+        <p><strong><i class="fas fa-eye"></i> Estado:</strong> {{ "Leído" if notification.is_read else "No leído" }}</p>
+        <a href="{% url 'notification_list' %}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Volver a Notificaciones</a>
     </div>
 </div>
 {% endblock %}

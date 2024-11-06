@@ -5,18 +5,26 @@
 {% block content %}
 <div class="container mt-5">
     <!-- Título Principal -->
-    <h1 class="text-center display-4 text-primary mb-4">Perfil de Empresa</h1>
+    <h1 class="text-center display-4 text-primary mb-4">
+        <i class="fas fa-building"></i> Perfil de Empresa
+    </h1>
     
     <!-- Información de Empresa -->
     <div class="card shadow-lg p-4 mb-5 border-0">
         <div class="card-body">
-            <h3 class="card-title text-primary">{{ user.username }}</h3>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Teléfono:</strong> {{ user.phone_number }}</p>
-            <p><strong>Dirección:</strong> {{ user.address }}</p>
+            <h3 class="card-title text-primary">
+                <i class="fas fa-user-tie"></i> {{ user.username }}
+            </h3>
+            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
+            <p><i class="fas fa-phone"></i> <strong>Teléfono:</strong> {{ user.phone_number }}</p>
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> {{ user.address }}</p>
             <div class="d-flex justify-content-center gap-3 mt-4">
-                <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary px-4">Editar Perfil</a>
-                <a href="{% url 'dashboard' %}" class="btn btn-primary px-4">Ir al Dashboard</a>
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary px-4">
+                    <i class="fas fa-edit"></i> Editar Perfil
+                </a>
+                <a href="{% url 'dashboard' %}" class="btn btn-primary px-4">
+                    <i class="fas fa-tachometer-alt"></i> Ir al Dashboard
+                </a>
             </div>
         </div>
     </div>
@@ -24,20 +32,27 @@
     <!-- Notificación de Reservas Pendientes -->
     {% if pending_count > 0 %}
         <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-circle"></i>
             <strong>Tienes {{ pending_count }} reserva{% if pending_count > 1 %}s{% endif %} pendiente{% if pending_count > 1 %}s{% endif %} de aceptar.</strong>
         </div>
     {% endif %}
 
     <!-- Servicios Ofrecidos -->
-    <h2 class="section-title text-center text-secondary mb-4">Servicios Ofrecidos</h2>
+    <h2 class="section-title text-center text-secondary mb-4">
+        <i class="fas fa-concierge-bell"></i> Servicios Ofrecidos
+    </h2>
     <div class="row mb-5">
         {% for service in offered_services %}
             <div class="col-md-4 mb-3">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{{ service.name }}</h5>
+                        <h5 class="card-title text-primary">
+                            <i class="fas fa-briefcase"></i> {{ service.name }}
+                        </h5>
                         <p class="card-text">{{ service.description|truncatewords:15 }}</p>
-                        <p class="font-weight-bold">Precio: {{ service.price }} €</p>
+                        <p class="font-weight-bold">
+                            <i class="fas fa-euro-sign"></i> Precio: {{ service.price }} €
+                        </p>
                     </div>
                 </div>
             </div>
@@ -49,14 +64,18 @@
     </div>
 
     <!-- Reservas Asociadas -->
-    <h2 class="section-title text-center text-secondary mb-4">Reservas Asociadas a Tus Servicios</h2>
+    <h2 class="section-title text-center text-secondary mb-4">
+        <i class="fas fa-calendar-alt"></i> Reservas Asociadas a Tus Servicios
+    </h2>
     <div class="list-group mb-5 shadow-sm">
         {% for booking in company_bookings %}
             <div class="list-group-item border-0 bg-light mb-2 p-4 rounded">
-                <h5 class="text-primary">Cliente: {{ booking.user.username }}</h5>
-                <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
-                <p><strong>Fecha:</strong> {{ booking.date }}</p>
-                <p><strong>Estado:</strong> {{ booking.status }}</p>
+                <h5 class="text-primary">
+                    <i class="fas fa-user"></i> Cliente: {{ booking.user.username }}
+                </h5>
+                <p><i class="fas fa-briefcase"></i> <strong>Servicio:</strong> {{ booking.service.name }}</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Fecha:</strong> {{ booking.date }}</p>
+                <p><i class="fas fa-info-circle"></i> <strong>Estado:</strong> {{ booking.status }}</p>
             </div>
         {% empty %}
             <p class="text-center text-muted">No tienes reservas asociadas a tus servicios.</p>
@@ -65,7 +84,9 @@
 
     <!-- Botón para Añadir Servicio -->
     <div class="text-center">
-        <a href="{% url 'service_create' %}" class="btn btn-success btn-lg w-50">Añadir Servicio</a>
+        <a href="{% url 'service_create' %}" class="btn btn-success btn-lg w-50">
+            <i class="fas fa-plus-circle"></i> Añadir Servicio
+        </a>
     </div>
 </div>
 {% endblock %}

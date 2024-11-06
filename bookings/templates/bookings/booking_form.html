@@ -1,4 +1,3 @@
-<!-- templates/bookings/booking_form.html -->
 {% extends "base.html" %}
 
 {% block title %}Reservar Servicio{% endblock %}
@@ -6,28 +5,28 @@
 {% block content %}
 <div class="container mt-5">
     <div class="text-center mb-5">
-        <h1 class="display-4 text-primary">Reservar: {{ service.name }}</h1>
+        <h1 class="display-4 text-primary"><i class="fas fa-calendar-plus"></i> Reservar: {{ service.name }}</h1>
         <p class="lead text-muted">Completa los detalles para reservar este servicio.</p>
     </div>
 
     <div class="card shadow-lg border-0 p-4">
         <div class="card-body mb-4">
-            <h5 class="text-secondary">Detalles del Servicio</h5>
+            <h5 class="text-secondary"><i class="fas fa-info-circle"></i> Detalles del Servicio</h5>
             <p><strong>Descripción:</strong> {{ service.description }}</p>
-            <p><strong>Precio:</strong> {{ service.price }} €</p>
+            <p><strong><i class="fas fa-euro-sign"></i> Precio:</strong> {{ service.price }} €</p>
         </div>
 
         <form method="post" class="p-3">
             {% csrf_token %}
             
             <div class="form-group mb-4">
-                <label for="id_date" class="font-weight-bold">Fecha</label>
+                <label for="id_date" class="font-weight-bold"><i class="fas fa-calendar-alt"></i> Fecha</label>
                 {{ form.date }}
             </div>
 
             <div class="d-flex gap-3">
-                <button type="submit" class="btn btn-success w-100">Reservar</button>
-                <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-secondary w-100">Cancelar</a>
+                <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Reservar</button>
+                <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-secondary w-100"><i class="fas fa-times"></i> Cancelar</a>
             </div>
         </form>
     </div>

@@ -1,34 +1,42 @@
 <nav class="navbar navbar-custom navbar-expand-lg bg-gradient-primary shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">Next-Service</a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <i class="fas fa-cut"></i> Next-Service
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>        
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'service_list' %}">Servicios</a>
+                    <a class="nav-link" href="{% url 'service_list' %}">
+                        <i class="fas fa-concierge-bell"></i> Servicios
+                    </a>
                 </li>
 
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Mi Cuenta</a>
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            <i class="fas fa-user"></i> Mi Cuenta
+                        </a>
                     </li>
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="POST" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn text-white px-3" style="background-color: var(--color-accent);">
-                                Cerrar Sesión
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                             </button>
                         </form>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a href="{% url 'login' %}" class="btn btn-primary btn-sm text-white px-3">
-                            Iniciar Sesión
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                         </a>
                     </li>
                 {% endif %}

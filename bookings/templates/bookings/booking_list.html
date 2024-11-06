@@ -5,21 +5,25 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Mis Reservas</h1>
+    <h1 class="display-4 text-primary mb-4"><i class="fas fa-calendar-check"></i> Mis Reservas</h1>
     <div class="row">
         {% for booking in bookings %}
             <div class="col-md-4 mb-4">
-                <div class="card shadow-sm h-100">
+                <div class="card shadow-sm h-100 border-0">
                     <div class="card-body">
-                        <h5 class="card-title">{{ booking.service.name }}</h5>
-                        <p><strong>Fecha:</strong> {{ booking.date }}</p>
-                        <p><strong>Estado:</strong> {{ booking.status }}</p>
-                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-primary">Ver Detalles</a>
+                        <h5 class="card-title text-primary"><i class="fas fa-concierge-bell"></i> {{ booking.service.name }}</h5>
+                        <p><strong><i class="fas fa-calendar-alt"></i> Fecha:</strong> {{ booking.date|date:"d M Y - H:i" }}</p>
+                        <p><strong><i class="fas fa-info-circle"></i> Estado:</strong> {{ booking.status }}</p>
+                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> Ver Detalles
+                        </a>
                     </div>
                 </div>
             </div>
         {% empty %}
-            <p class="text-muted">No tienes reservas en este momento.</p>
+            <div class="col-12">
+                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No tienes reservas en este momento.</p>
+            </div>
         {% endfor %}
     </div>
 </div>
