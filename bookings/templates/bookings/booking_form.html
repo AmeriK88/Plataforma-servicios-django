@@ -4,33 +4,36 @@
 {% block title %}Reservar Servicio{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1>Reservar: {{ service.name }}</h1>
-    <p>Descripción: {{ service.description }}</p>
-    <p>Precio: {{ service.price }} €</p>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary">Reservar: {{ service.name }}</h1>
+        <p class="lead text-muted">Completa los detalles para reservar este servicio.</p>
+    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="id_date">Fecha:</label>
-            {{ form.date }}
+    <div class="card shadow-lg border-0 p-4">
+        <div class="card-body mb-4">
+            <h5 class="text-secondary">Detalles del Servicio</h5>
+            <p><strong>Descripción:</strong> {{ service.description }}</p>
+            <p><strong>Precio:</strong> {{ service.price }} €</p>
         </div>
-        
-        <div class="form-group">
-            <label for="id_status">Estado:</label>
-            {{ form.status }}
-        </div>
-        
-        <button type="submit" class="btn btn-success">Reservar</button>
-        <a href="{% url 'service_detail' service.id %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+
+        <form method="post" class="p-3">
+            {% csrf_token %}
+            
+            <div class="form-group mb-4">
+                <label for="id_date" class="font-weight-bold">Fecha</label>
+                {{ form.date }}
+            </div>
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-success w-100">Reservar</button>
+                <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-secondary w-100">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
 
-<!-- Incluye Flatpickr -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <script>
     // Activa Flatpickr en el campo de fecha
     flatpickr("#id_date", {

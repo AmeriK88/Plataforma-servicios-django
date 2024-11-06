@@ -24,16 +24,15 @@ def booking_create(request, service_id):
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
-            booking.service = service
-            booking.user = request.user
+            booking.user = request.user  
+            booking.service = service    
+            booking.status = 'pending'   #
             booking.save()
-            return redirect('dashboard')  #
+            return redirect('dashboard')
     else:
         form = BookingForm()
-        form.fields['date'].widget.attrs.update({'type': 'date'})
 
     return render(request, 'bookings/booking_form.html', {'form': form, 'service': service})
-
 
 @login_required
 def confirm_booking(request, pk):
@@ -42,4 +41,4 @@ def confirm_booking(request, pk):
     if request.user == booking.service.provider:
         booking.status = 'confirmed'
         booking.save()
-    return redirect('dashboard')  # Redirige al dashboard de la empresa después de confirmar
+    return redirect('dashboard') 

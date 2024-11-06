@@ -1,32 +1,33 @@
+<!-- templates/services/service_detail.html -->
 {% extends "base.html" %}
 
 {% block title %}{{ service.name }}{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Título y Encabezado del Servicio -->
-    <div class="text-center">
-        <h1 class="display-4 text-primary mb-4">{{ service.name }}</h1>
-        <p class="lead text-muted">Explora los detalles de este servicio y reserva con facilidad.</p>
+    <!-- Encabezado del Servicio -->
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-primary">{{ service.name }}</h1>
+        <p class="lead text-muted">Descubre más sobre este servicio y realiza una reserva.</p>
     </div>
 
     <!-- Detalles del Servicio en Tarjeta -->
     <div class="card shadow-lg border-0 mt-4">
         <div class="card-body p-5">
-            <h5 class="card-title text-secondary mb-3">Descripción del Servicio</h5>
-            <p class="card-text text-muted">{{ service.description }}</p>
+            <h5 class="text-secondary">Descripción del Servicio</h5>
+            <p class="text-muted">{{ service.description }}</p>
 
+            <!-- Precio y Botón de Reserva -->
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <span class="h4 text-success font-weight-bold">Precio: {{ service.price }} €</span>
-                <!-- Botón para Reservar -->
                 <a href="{% url 'booking_create' service.id %}" class="btn btn-primary btn-lg">Reservar este servicio</a>
             </div>
         </div>
     </div>
 
-    <!-- Botón para Volver -->
+    <!-- Botón para Volver a la Lista de Servicios -->
     <div class="text-center mt-5">
-        <a href="{% url 'service_list' %}" class="btn btn-outline-secondary">Volver a la lista de servicios</a>
+        <a href="{% url 'service_list' %}" class="btn btn-outline-secondary btn-lg">Volver a la lista de servicios</a>
     </div>
 </div>
 {% endblock %}

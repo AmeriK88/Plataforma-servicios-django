@@ -7,7 +7,18 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 def service_list(request):
-    services = Service.objects.all()
+    # Verifica si el usuario está autenticado
+    if request.user.is_authenticated:
+        # Si es empresa, muestra solo los servicios que ha publicado
+        if request.user.is_company:
+            services = Service.objects.filter(provider=request.user)
+        # Si es cliente, muestra todos los servicios
+        else:
+            services = Service.objects.all()
+    else:
+        # Si no está autenticado, muestra todos los servicios
+        services = Service.objects.all()
+    
     return render(request, 'services/service_list.html', {'services': services})
 
 def service_detail(request, pk):

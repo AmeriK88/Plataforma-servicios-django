@@ -4,16 +4,26 @@
 {% block title %}Detalle de Reserva{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1>Detalle de la Reserva</h1>
-    <div class="card shadow-sm">
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Detalle de la Reserva</h1>
+    <div class="card shadow-lg p-4">
         <div class="card-body">
-            <h5 class="card-title">{{ booking.service.name }}</h5>
+            <h3 class="card-title text-primary">{{ booking.service.name }}</h3>
             <p><strong>Proveedor:</strong> {{ booking.service.provider.username }}</p>
             <p><strong>Fecha:</strong> {{ booking.date }}</p>
-            <p><strong>Estado:</strong> {{ booking.status }}</p>
+            <p><strong>Estado:</strong> 
+                <span class="badge 
+                    {% if booking.status == 'confirmed' %} bg-success
+                    {% elif booking.status == 'pending' %} bg-warning
+                    {% else %} bg-secondary
+                    {% endif %}">
+                    {{ booking.status|capfirst }}
+                </span>
+            </p>
         </div>
     </div>
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Volver a la Lista</a>
+    <div class="text-center mt-4">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-lg">Volver al Dashboard</a>
+    </div>
 </div>
 {% endblock %}
