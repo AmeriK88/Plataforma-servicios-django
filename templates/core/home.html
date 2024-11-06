@@ -4,13 +4,45 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <h1>Bienvenido a Mi Proyecto</h1>
-    <p>Esta es la página de inicio de la plataforma. Aquí puedes ver una breve introducción y acceder a diferentes secciones usando el menú de navegación.</p>
-    
-    <!-- Ejemplo de secciones destacadas -->
-    <section>
-        <h2>Servicios Destacados</h2>
-        <p>Explora nuestros servicios más populares y encuentra lo que necesitas.</p>
-        <a href="{% url 'service_list' %}" class="btn">Ver Servicios</a>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-primary mb-4">Bienvenido a Next-Service</h1>
+        <p class="lead text-muted">Descubre los mejores servicios y soluciones para tus necesidades.</p>
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg mt-3">Únete Ahora</a>
+    </div>
+
+    <!-- Servicios Destacados -->
+    <section class="mt-5">
+        <h2 class="text-secondary">Servicios Destacados</h2>
+        <p class="text-muted">Explora nuestros servicios más populares y encuentra lo que necesitas.</p>
+        <div class="row">
+            <!-- Puedes repetir este bloque para cada servicio destacado -->
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Servicio Destacado 1</h5>
+                        <p class="card-text">Descripción breve del servicio, destacando sus beneficios y características.</p>
+                        <a href="{% url 'service_list' %}" class="btn btn-outline-primary btn-sm">Ver Servicios</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Repetir bloque para otros servicios -->
+        </div>
     </section>
+
+   <!-- Acceso al Dashboard -->
+    {% if user.is_authenticated %}
+    <section class="mt-5 bg-light p-5 rounded shadow-sm text-center">
+        <h2 class="text-secondary">Accede a tu Dashboard</h2>
+        <p class="text-muted">Gestiona tus servicios, revisa tus citas y personaliza tu experiencia.</p>
+        <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">Ir al Dashboard</a>
+    </section>
+    {% else %}
+    <section class="mt-5 bg-light p-5 rounded shadow-sm text-center">
+        <h2 class="text-secondary">Únete a Nuestra Comunidad</h2>
+        <p class="text-muted">Crea una cuenta para acceder a tu propio panel y explorar todos nuestros servicios.</p>
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Únete Ahora</a>
+    </section>
+    {% endif %}
+</div>
 {% endblock %}
