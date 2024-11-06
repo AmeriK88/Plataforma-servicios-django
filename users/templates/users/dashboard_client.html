@@ -1,0 +1,36 @@
+<!-- templates/users/dashboard_client.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard de Cliente{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Dashboard de Cliente</h1>
+
+    <h2>Mis Reservas Activas</h2>
+    <ul class="list-group mb-3">
+        {% for booking in user.active_bookings %}
+            <li class="list-group-item">
+                <h5>Servicio: {{ booking.service.name }}</h5>
+                <p><strong>Empresa:</strong> {{ booking.service.company_name }}</p>
+                <p><strong>Fecha:</strong> {{ booking.date }}</p>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No tienes reservas activas.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Servicios Recomendados</h2>
+    <ul class="list-group mb-3">
+        {% for service in recommended_services %}
+            <li class="list-group-item">
+                <h5>{{ service.name }}</h5>
+                <p>{{ service.description|truncatewords:20 }}</p>
+                <a href="{% url 'service_detail' service.id %}" class="btn btn-primary btn-sm">Ver Servicio</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No hay servicios recomendados en este momento.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

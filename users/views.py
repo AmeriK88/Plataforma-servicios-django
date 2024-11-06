@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm
+from .forms import ProfileEditForm
 
 
 def home(request):
@@ -56,3 +57,15 @@ def dashboard_view(request):
     if user.is_company:
         return render(request, 'users/dashboard_company.html')  # Dashboard para empresas
     return render(request, 'users/dashboard_client.html')  # Dashboard para clientes
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirige al perfil después de guardar
+    else:
+        form = ProfileEditForm(instance=request.user)
+
+    return render(request, 'users/edit_profile.html', {'form': form})

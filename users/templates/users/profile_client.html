@@ -1,5 +1,34 @@
-<!-- users/templates/users/profile_client.html -->
-<h1>Perfil de Cliente</h1>
-<p>Nombre de usuario: {{ user.username }}</p>
-<p>Correo electrónico: {{ user.email }}</p>
-<!-- Aquí puedes añadir más información específica para clientes -->
+<!-- templates/users/profile_client.html -->
+{% extends 'base.html' %}
+
+{% block title %}Perfil de Cliente{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Perfil de Cliente</h1>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3>{{ user.username }}</h3>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Teléfono:</strong> {{ user.phone_number }}</p>
+
+            <!-- Botón para editar el perfil -->
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
+        </div>
+    </div>
+
+    <h2>Historial de Reservas</h2>
+    <ul class="list-group mb-3">
+        {% for booking in user.bookings.all %}
+            <li class="list-group-item">
+                <h5>Servicio: {{ booking.service.name }}</h5>
+                <p><strong>Fecha:</strong> {{ booking.date }}</p>
+                <p><strong>Empresa:</strong> {{ booking.service.company_name }}</p>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No tienes reservas anteriores.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -13,17 +13,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'service_list' %}">Servicios</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Mi Cuenta</a>
-                </li>
-                <li class="nav-item">
-                    <form action="{% url 'logout' %}" method="POST" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0; border: none; background: none; color: inherit;">
-                            Cerrar Sesión
-                        </button>
-                    </form>
-                </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Mi Cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0; border: none; background: none; color: inherit;">
+                                Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
