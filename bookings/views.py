@@ -19,7 +19,6 @@ def booking_detail(request, pk):
 
 @login_required
 def booking_create(request, service_id):
-    """ Permite al usuario crear una nueva reserva para un servicio específico """
     service = get_object_or_404(Service, id=service_id)
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -28,7 +27,19 @@ def booking_create(request, service_id):
             booking.service = service
             booking.user = request.user
             booking.save()
-            return redirect('booking_list')
+            return redirect('dashboard')  #
     else:
         form = BookingForm()
+        form.fields['date'].widget.attrs.update({'type': 'date'})
+
     return render(request, 'bookings/booking_form.html', {'form': form, 'service': service})
+
+
+@login_required
+def confirm_booking(request, pk):
+    booking = get_object_or_404(Booking, pk=pk)
+    # Solo el proveedor (empresa) debería confirmar la reserva
+    if request.user == booking.service.provider:
+        booking.status = 'confirmed'
+        booking.save()
+    return redirect('dashboard')  # Redirige al dashboard de la empresa después de confirmar

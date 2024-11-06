@@ -20,17 +20,5 @@
             <li class="list-group-item">No tienes reservas pendientes.</li>
         {% endfor %}
     </ul>
-
-    <h2>Notificaciones</h2>
-    <ul class="list-group mb-3">
-        {% for notification in user.notifications.all %}
-            <li class="list-group-item {% if notification.is_read %}bg-light{% endif %}">
-                <p>{{ notification.message }}</p>
-                <small><em>{{ notification.timestamp }}</em></small>
-            </li>
-        {% empty %}
-            <li class="list-group-item">No tienes notificaciones.</li>
-        {% endfor %}
-    </ul>
 </div>
 {% endblock %}

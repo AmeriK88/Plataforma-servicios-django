@@ -21,15 +21,14 @@ def home(request):
 # Vista basada en clase para registro
 class SignUpView(CreateView):
     model = CustomUser
-    form_class = CustomUserCreationForm  # Usa el formulario personalizado
+    form_class = CustomUserCreationForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('login')
 
     def form_valid(self, form):
-        # Asegura que al menos uno de los roles esté seleccionado
         user = form.save(commit=False)
         if not (user.is_company or user.is_client):
-            user.is_client = True  # Por defecto, es cliente si no selecciona ninguno
+            user.is_client = True
         user.save()
         login(self.request, user)
         return redirect('profile')
@@ -53,9 +52,11 @@ def profile_view(request):
     
     if user.is_company:
         offered_services = user.services.all()
+        company_bookings = Booking.objects.filter(service__in=offered_services)
         return render(request, 'users/profile_company.html', {
             'user': user,
-            'offered_services': offered_services
+            'offered_services': offered_services,
+            'company_bookings': company_bookings
         })
     else:
         # Para clientes, muestra el historial de reservas anteriores
@@ -95,7 +96,7 @@ def edit_profile(request):
         form = ProfileEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirige al perfil después de guardar
+            return redirect('profile')
     else:
         form = ProfileEditForm(instance=request.user)
 

@@ -1,4 +1,3 @@
-<!-- templates/users/profile_company.html -->
 {% extends 'base.html' %}
 
 {% block title %}Perfil de Empresa{% endblock %}
@@ -21,7 +20,7 @@
 
     <h2>Servicios Ofrecidos</h2>
     <ul class="list-group mb-3">
-        {% for service in user.services.all %}
+        {% for service in offered_services %}
             <li class="list-group-item">
                 <h5>{{ service.name }}</h5>
                 <p>{{ service.description }}</p>
@@ -29,6 +28,20 @@
             </li>
         {% empty %}
             <li class="list-group-item">No has añadido ningún servicio aún.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Reservas Asociadas a Tus Servicios</h2>
+    <ul class="list-group mb-3">
+        {% for booking in company_bookings %}
+            <li class="list-group-item">
+                <h5>Cliente: {{ booking.user.username }}</h5>
+                <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
+                <p><strong>Fecha:</strong> {{ booking.date }}</p>
+                <p><strong>Estado:</strong> {{ booking.status }}</p>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No tienes reservas asociadas a tus servicios.</li>
         {% endfor %}
     </ul>
 
