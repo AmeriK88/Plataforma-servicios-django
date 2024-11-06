@@ -9,21 +9,6 @@
         <p class="lead text-muted">Revisa tus citas activas y servicios recomendados.</p>
     </div>
 
-    <!-- Notificaciones del Cliente -->
-    <section class="mt-5">
-        <h2 class="text-secondary"><i class="fas fa-bell"></i> Notificaciones</h2>
-        <ul class="list-group">
-            {% for notification in notifications %}
-                <li class="list-group-item">
-                    {{ notification.message }}
-                    <a href="{% url 'mark_as_read' notification.id %}" class="btn btn-sm btn-link"><i class="fas fa-check"></i> Marcar como leída</a>
-                </li>
-            {% empty %}
-                <li class="list-group-item text-muted"><i class="fas fa-info-circle"></i> No tienes notificaciones nuevas.</li>
-            {% endfor %}
-        </ul>
-    </section>
-
     <!-- Reservas Activas del Cliente -->
     <h2 class="mt-5 section-title text-secondary"><i class="fas fa-calendar-check"></i> Mis Reservas Activas</h2>
     <div class="row">

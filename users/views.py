@@ -51,18 +51,14 @@ def profile_view(request):
     user = request.user
     
     if user.is_company:
-        # Servicios ofrecidos por la empresa
+        # Lógica para el perfil de la empresa
         offered_services = user.services.all()
-        
-        # Reservas asociadas a los servicios de la empresa
         company_bookings = Booking.objects.filter(service__in=offered_services)
-        
-        # Contador de reservas pendientes
         pending_count = company_bookings.filter(status='pending').count()
         
-        # Notificaciones no leídas para la empresa
+        # Mostrar solo notificaciones no leídas
         notifications = Notification.objects.filter(user=user, is_read=False)
-
+        
         return render(request, 'users/profile_company.html', {
             'user': user,
             'offered_services': offered_services,
@@ -71,12 +67,27 @@ def profile_view(request):
             'notifications': notifications,
         })
     else:
-        # Para clientes, muestra el historial de reservas anteriores
+        # Lógica para el perfil del cliente
         past_bookings = user.client_bookings.filter(date__lt=timezone.now())
+        
+        # Filtra las notificaciones no leídas para el cliente
+        notifications = Notification.objects.filter(user=user, is_read=False)
+        
+        # Si deseas eliminar duplicados por mensaje:
+        unique_notifications = []
+        seen_messages = set()
+        for notification in notifications:
+            if notification.message not in seen_messages:
+                unique_notifications.append(notification)
+                seen_messages.add(notification.message)
+        
         return render(request, 'users/profile_client.html', {
             'user': user,
             'past_bookings': past_bookings,
+            'notifications': unique_notifications,
         })
+
+
     
 @login_required
 def dashboard_view(request):
@@ -89,18 +100,18 @@ def dashboard_view(request):
         return render(request, 'users/dashboard_company.html', {
             'pending_bookings': pending_bookings,
             'pending_count': pending_count,
-            'notifications': Notification.objects.filter(user=user, is_read=False),  # Notificaciones solo para empresa
+            'notifications': Notification.objects.filter(user=user, is_read=False),
             'user': user,
         })
     else:
-        # Reservas activas para el cliente
         active_bookings = user.client_bookings.filter(date__gte=timezone.now(), status='confirmed')
         recommended_services = Service.objects.exclude(provider=user)
-
+        
+        # Sin filtro `is_read` para mostrar todas las notificaciones
         return render(request, 'users/dashboard_client.html', {
             'active_bookings': active_bookings,
             'recommended_services': recommended_services,
-            'notifications': Notification.objects.filter(user=user, is_read=False),  # Notificaciones solo para cliente
+            'notifications': Notification.objects.filter(user=user),
             'user': user,
         })
 

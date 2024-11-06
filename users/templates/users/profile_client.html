@@ -29,6 +29,22 @@
         </div>
     </div>
 
+    <!-- Notificaciones del Cliente -->
+    <section class="mt-5">
+        <h2 class="text-secondary"><i class="fas fa-bell"></i> Notificaciones</h2>
+        <ul class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item {% if not notification.is_read %}font-weight-bold{% endif %}">
+                    {{ notification.message }}
+                    <a href="{% url 'mark_as_read' notification.id %}" class="btn btn-sm btn-link"><i class="fas fa-check"></i> Marcar como leída</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted"><i class="fas fa-info-circle"></i> No tienes notificaciones nuevas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+    
+
     <!-- Historial de Reservas -->
     <h2 class="section-title text-secondary mt-5">
         <i class="fas fa-history"></i> Historial de Reservas
