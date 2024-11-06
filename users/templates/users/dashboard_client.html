@@ -9,6 +9,22 @@
         <p class="lead text-muted">Revisa tus citas activas y servicios recomendados.</p>
     </div>
 
+    <!-- Notificaciones -->
+    <section class="mt-5">
+        <h2 class="text-secondary">Notificaciones</h2>
+        <ul class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item">
+                    {{ notification.message }}
+                    <a href="{% url 'mark_as_read' notification.id %}" class="btn btn-sm btn-link">Marcar como leída</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">No tienes notificaciones nuevas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+    
+
     <h2 class="section-title text-secondary">Mis Reservas Activas</h2>
     <div class="row">
         {% for booking in active_bookings %}

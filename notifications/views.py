@@ -15,3 +15,4 @@ def mark_as_read(request, pk):
     notification.is_read = True
     notification.save()
     return redirect('notification_list')
+

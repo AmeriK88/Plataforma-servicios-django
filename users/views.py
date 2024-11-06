@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
-from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -13,6 +12,7 @@ from .forms import ProfileEditForm
 from services.models import Service
 from django.utils import timezone
 from bookings.models import Booking
+from notifications.models import Notification
 
 
 def home(request):
@@ -79,13 +79,14 @@ def dashboard_view(request):
             'user': user,
         })
     else:
-        # Reservas activas para el cliente
         active_bookings = user.client_bookings.filter(date__gte=timezone.now())
         recommended_services = Service.objects.exclude(provider=user)
+        notifications = Notification.objects.filter(user=user, is_read=False)  # Notificaciones no leídas
 
         return render(request, 'users/dashboard_client.html', {
             'active_bookings': active_bookings,
             'recommended_services': recommended_services,
+            'notifications': notifications,  # Pasa las notificaciones al template
             'user': user,
         })
 

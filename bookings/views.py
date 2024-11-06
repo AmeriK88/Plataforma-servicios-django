@@ -4,6 +4,8 @@ from .models import Booking
 from .forms import BookingForm
 from services.models import Service
 from django.contrib.auth.decorators import login_required
+from notifications.models import Notification
+
 
 @login_required
 def booking_list(request):
@@ -41,4 +43,10 @@ def confirm_booking(request, pk):
     if request.user == booking.service.provider:
         booking.status = 'confirmed'
         booking.save()
-    return redirect('dashboard') 
+        
+        # Crear notificación para el usuario de la reserva
+        Notification.objects.create(
+            user=booking.user,
+            message=f"Tu reserva para {booking.service.name} ha sido confirmada."
+        )
+    return redirect('dashboard')
