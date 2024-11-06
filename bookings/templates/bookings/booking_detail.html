@@ -1,0 +1,19 @@
+<!-- templates/bookings/booking_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}Detalle de Reserva{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Detalle de la Reserva</h1>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">{{ booking.service.name }}</h5>
+            <p><strong>Proveedor:</strong> {{ booking.service.provider.username }}</p>
+            <p><strong>Fecha:</strong> {{ booking.date }}</p>
+            <p><strong>Estado:</strong> {{ booking.status }}</p>
+        </div>
+    </div>
+    <a href="{% url 'booking_list' %}" class="btn btn-secondary mt-3">Volver a la Lista</a>
+</div>
+{% endblock %}

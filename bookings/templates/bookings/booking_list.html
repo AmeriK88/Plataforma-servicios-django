@@ -1,0 +1,26 @@
+<!-- templates/bookings/booking_list.html -->
+{% extends "base.html" %}
+
+{% block title %}Mis Reservas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Mis Reservas</h1>
+    <div class="row">
+        {% for booking in bookings %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ booking.service.name }}</h5>
+                        <p><strong>Fecha:</strong> {{ booking.date }}</p>
+                        <p><strong>Estado:</strong> {{ booking.status }}</p>
+                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No tienes reservas en este momento.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

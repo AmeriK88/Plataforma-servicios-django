@@ -10,6 +10,9 @@ from .models import CustomUser
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm
 from .forms import ProfileEditForm
+from services.models import Service
+from django.utils import timezone
+from bookings.models import Booking
 
 
 def home(request):
@@ -47,16 +50,44 @@ def login_view(request):
 @login_required
 def profile_view(request):
     user = request.user
+    
     if user.is_company:
-        return render(request, 'users/profile_company.html')  # Plantilla para empresas
-    return render(request, 'users/profile_client.html')  # Plantilla para clientes
-
+        offered_services = user.services.all()
+        return render(request, 'users/profile_company.html', {
+            'user': user,
+            'offered_services': offered_services
+        })
+    else:
+        # Para clientes, muestra el historial de reservas anteriores
+        past_bookings = user.client_bookings.filter(date__lt=timezone.now())
+        return render(request, 'users/profile_client.html', {
+            'user': user,
+            'past_bookings': past_bookings
+        })
+    
+    
 @login_required
 def dashboard_view(request):
     user = request.user
     if user.is_company:
-        return render(request, 'users/dashboard_company.html')  # Dashboard para empresas
-    return render(request, 'users/dashboard_client.html')  # Dashboard para clientes
+        company_services = Service.objects.filter(provider=user)
+        pending_bookings = Booking.objects.filter(service__in=company_services, status='pending')
+        
+        return render(request, 'users/dashboard_company.html', {
+            'pending_bookings': pending_bookings,
+            'user': user,
+        })
+    else:
+        # Reservas activas para el cliente
+        active_bookings = user.client_bookings.filter(date__gte=timezone.now())
+        recommended_services = Service.objects.exclude(provider=user)
+
+        return render(request, 'users/dashboard_client.html', {
+            'active_bookings': active_bookings,
+            'recommended_services': recommended_services,
+            'user': user,
+        })
+
 
 @login_required
 def edit_profile(request):

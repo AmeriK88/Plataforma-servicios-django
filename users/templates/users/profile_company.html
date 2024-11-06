@@ -9,13 +9,13 @@
 
     <div class="card mb-3">
         <div class="card-body">
-            <h3>{{ user.company_name }}</h3>
+            <h3>{{ user.username }}</h3>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Teléfono:</strong> {{ user.phone_number }}</p>
             <p><strong>Dirección:</strong> {{ user.address }}</p>
 
-            <!-- Botón para editar el perfil -->
             <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-2">Ir al Dashboard</a>
         </div>
     </div>
 
@@ -32,7 +32,6 @@
         {% endfor %}
     </ul>
 
-    <!-- Botón para añadir un nuevo servicio -->
-    <a href="{% url 'add_service' %}" class="btn btn-success">Añadir Servicio</a>
+    <a href="{% url 'service_create' %}" class="btn btn-success">Añadir Servicio</a>
 </div>
 {% endblock %}

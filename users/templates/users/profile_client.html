@@ -1,4 +1,3 @@
-<!-- templates/users/profile_client.html -->
 {% extends 'base.html' %}
 
 {% block title %}Perfil de Cliente{% endblock %}
@@ -11,20 +10,19 @@
         <div class="card-body">
             <h3>{{ user.username }}</h3>
             <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Teléfono:</strong> {{ user.phone_number }}</p>
 
-            <!-- Botón para editar el perfil -->
             <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-2">Ir al Dashboard</a>
         </div>
     </div>
 
     <h2>Historial de Reservas</h2>
     <ul class="list-group mb-3">
-        {% for booking in user.bookings.all %}
+        {% for booking in user.client_bookings.all %}
             <li class="list-group-item">
                 <h5>Servicio: {{ booking.service.name }}</h5>
                 <p><strong>Fecha:</strong> {{ booking.date }}</p>
-                <p><strong>Empresa:</strong> {{ booking.service.company_name }}</p>
+                <p><strong>Empresa:</strong> {{ booking.service.provider.username }}</p>
             </li>
         {% empty %}
             <li class="list-group-item">No tienes reservas anteriores.</li>

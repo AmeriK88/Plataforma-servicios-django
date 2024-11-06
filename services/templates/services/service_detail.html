@@ -1,12 +1,15 @@
 <!-- templates/services/service_detail.html -->
 {% extends "base.html" %}
 
-{% block content %}
-<h1>{{ service.name }}</h1>
-<p><strong>Descripción:</strong> {{ service.description }}</p>
-<p><strong>Precio:</strong> {{ service.price }} €</p>
-<p><strong>Proveedor:</strong> {{ service.provider.username }}</p>
+{% block title %}{{ service.name }}{% endblock %}
 
-<!-- Botón de reserva -->
-<a href="{% url 'booking_form' %}?service_id={{ service.id }}" class="btn btn-primary">Reservar este servicio</a>
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ service.name }}</h1>
+    <p>{{ service.description }}</p>
+    <p>Precio: {{ service.price }} €</p>
+
+    <!-- Enlace al formulario de reserva -->
+    <a href="{% url 'booking_create' service.id %}" class="btn btn-primary">Reservar este servicio</a>
+</div>
 {% endblock %}

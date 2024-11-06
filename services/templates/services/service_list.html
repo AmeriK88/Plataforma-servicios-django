@@ -1,17 +1,33 @@
 <!-- templates/services/service_list.html -->
 {% extends "base.html" %}
 
+{% block title %}Lista de Servicios{% endblock %}
+
 {% block content %}
-<h1>Lista de Servicios</h1>
-<ul>
-    {% for service in services %}
-        <li>
-            <h3><a href="{% url 'service_detail' service.id %}">{{ service.name }}</a></h3>
-            <p>{{ service.description|truncatewords:20 }}</p>
-            <p>Precio: {{ service.price }} €</p>
-        </li>
-    {% empty %}
-        <p>No hay servicios disponibles en este momento.</p>
-    {% endfor %}
-</ul>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Lista de Servicios</h1>
+
+    <div class="row">
+        {% for service in services %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'service_detail' service.id %}" class="text-decoration-none">{{ service.name }}</a>
+                        </h5>
+                        <p class="card-text">{{ service.description|truncatewords:20 }}</p>
+                        <p class="text-primary font-weight-bold">Precio: {{ service.price }} €</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No hay servicios disponibles en este momento.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

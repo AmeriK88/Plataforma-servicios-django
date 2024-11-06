@@ -1,14 +1,19 @@
 <!-- templates/services/service_form.html -->
 {% extends "base.html" %}
 
-{% block content %}
-<h1>{% if service.id %}Editar Servicio{% else %}Nuevo Servicio{% endif %}</h1>
+{% block title %}{% if service %}Editar Servicio{% else %}Nuevo Servicio{% endif %}{% endblock %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">
-        {% if service.id %}Actualizar{% else %}Crear{% endif %}
-    </button>
-</form>
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if service %}Editar Servicio{% else %}Nuevo Servicio{% endif %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+            {% if service %}Actualizar{% else %}Crear{% endif %}
+        </button>
+        <a href="{% url 'service_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
 {% endblock %}

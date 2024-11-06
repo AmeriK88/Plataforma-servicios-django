@@ -1,0 +1,19 @@
+<!-- templates/bookings/booking_form.html -->
+{% extends "base.html" %}
+
+{% block title %}Reservar Servicio{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Reservar: {{ service.name }}</h1>
+    <p>Descripción: {{ service.description }}</p>
+    <p>Precio: {{ service.price }} €</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Reservar</button>
+        <a href="{% url 'service_detail' service.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
