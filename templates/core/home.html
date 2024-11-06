@@ -15,19 +15,19 @@
         <h2 class="text-secondary">Servicios Destacados</h2>
         <p class="text-muted">Explora nuestros servicios más populares y encuentra lo que necesitas.</p>
         <div class="row">
-            <!-- Puedes repetir este bloque para cada servicio destacado -->
-            <div class="col-md-4">
-                <div class="card shadow-sm mb-4">
+            <!-- Usar col-md-12 para ancho completo -->
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4 w-100">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">Servicio Destacado 1</h5>
-                        <p class="card-text">Descripción breve del servicio, destacando sus beneficios y características.</p>
+                        <h5 class="card-title text-primary">Servicios Destacados</h5>
+                        <p class="card-text">Descubre nuestra selección de servicios destacados, cuidadosamente escogidos para ofrecerte soluciones de calidad en diversas áreas. Desde servicios personalizados hasta opciones innovadoras, estamos comprometidos en proporcionarte lo mejor para satisfacer tus necesidades y expectativas. Explora estas opciones y encuentra el servicio perfecto para ti.</p>
                         <a href="{% url 'service_list' %}" class="btn btn-outline-primary btn-sm">Ver Servicios</a>
                     </div>
                 </div>
             </div>
-            <!-- Repetir bloque para otros servicios -->
         </div>
     </section>
+
 
     <!-- Acceso al Dashboard -->
     {% if user.is_authenticated %}

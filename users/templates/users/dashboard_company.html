@@ -12,11 +12,11 @@
 
     <!-- Sección de Reservas Pendientes -->
     <section class="mb-5">
-        <h2 class="text-secondary mb-4">Reservas Pendientes</h2>
+        <h2 class="text-secondary text-center text-md-left mb-4">Reservas Pendientes</h2>
         <div class="row">
             {% for booking in pending_bookings %}
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm border-0 h-100">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
                         <div class="card-body">
                             <h5 class="card-title text-success">Cliente: {{ booking.user.username }}</h5>
                             <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
@@ -27,11 +27,14 @@
                 </div>
             {% empty %}
                 <div class="col-12">
-                    <p class="text-center text-muted">No tienes reservas pendientes.</p>
+                    <div class="card shadow-sm p-4 text-center">
+                        <p class="text-muted m-0">No tienes reservas pendientes.</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </section>
+
 
     <!-- Botón para Agregar Nuevo Servicio -->
     <div class="text-center">
