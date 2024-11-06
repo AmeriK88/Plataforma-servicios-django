@@ -1,0 +1,16 @@
+<!-- templates/core/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido a Mi Proyecto</h1>
+    <p>Esta es la página de inicio de la plataforma. Aquí puedes ver una breve introducción y acceder a diferentes secciones usando el menú de navegación.</p>
+    
+    <!-- Ejemplo de secciones destacadas -->
+    <section>
+        <h2>Servicios Destacados</h2>
+        <p>Explora nuestros servicios más populares y encuentra lo que necesitas.</p>
+        <a href="{% url 'service_list' %}" class="btn">Ver Servicios</a>
+    </section>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- templates/services/service_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Lista de Servicios</h1>
+<ul>
+    {% for service in services %}
+        <li>
+            <h3><a href="{% url 'service_detail' service.id %}">{{ service.name }}</a></h3>
+            <p>{{ service.description|truncatewords:20 }}</p>
+            <p>Precio: {{ service.price }} €</p>
+        </li>
+    {% empty %}
+        <p>No hay servicios disponibles en este momento.</p>
+    {% endfor %}
+</ul>
+{% endblock %}
