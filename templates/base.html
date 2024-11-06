@@ -1,22 +1,23 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mi Proyecto{% endblock %}</title>
-
-    {% load static %} <!-- Carga archivos estáticos de Django -->
-
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Mi Proyecto{% endblock %}</title>
     
-    <!-- Enlace archivo CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <!-- Incluye Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-</head>
+        {% load static %} 
+    
+        <!-- Bootstrap CSS CDN -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Archivo CSS personalizado: colocar al final para sobrescribir Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+        <!-- Incluye Flatpickr -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    </head>
+    
 <body>
 
     <!-- Navbar -->

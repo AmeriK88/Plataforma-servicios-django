@@ -9,7 +9,7 @@
         <p class="lead text-muted">Únete a Next-Service y accede a los mejores servicios.</p>
     </div>
     
-    <div class="card shadow-sm mt-4 p-4">
+    <div class="card shadow-lg border-0 p-4 mt-4">
         <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
             {{ form.as_p }}

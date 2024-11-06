@@ -1,4 +1,3 @@
-<!-- templates/core/home.html -->
 {% extends 'base.html' %}
 
 {% block title %}Inicio{% endblock %}
@@ -30,15 +29,15 @@
         </div>
     </section>
 
-   <!-- Acceso al Dashboard -->
+    <!-- Acceso al Dashboard -->
     {% if user.is_authenticated %}
-    <section class="mt-5 bg-light p-5 rounded shadow-sm text-center">
+    <section class="mt-5 p-5 rounded shadow-sm bg-light text-center">
         <h2 class="text-secondary">Accede a tu Dashboard</h2>
         <p class="text-muted">Gestiona tus servicios, revisa tus citas y personaliza tu experiencia.</p>
         <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">Ir al Dashboard</a>
     </section>
     {% else %}
-    <section class="mt-5 bg-light p-5 rounded shadow-sm text-center">
+    <section class="mt-5 p-5 rounded shadow-sm bg-light text-center">
         <h2 class="text-secondary">Únete a Nuestra Comunidad</h2>
         <p class="text-muted">Crea una cuenta para acceder a tu propio panel y explorar todos nuestros servicios.</p>
         <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Únete Ahora</a>
