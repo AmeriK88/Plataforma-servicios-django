@@ -21,6 +21,13 @@
         </div>
     </div>
 
+    <!-- Notificación de Reservas Pendientes -->
+    {% if pending_count > 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            <strong>Tienes {{ pending_count }} reserva{% if pending_count > 1 %}s{% endif %} pendiente{% if pending_count > 1 %}s{% endif %} de aceptar.</strong>
+        </div>
+    {% endif %}
+
     <!-- Servicios Ofrecidos -->
     <h2 class="section-title text-center text-secondary mb-4">Servicios Ofrecidos</h2>
     <div class="row mb-5">

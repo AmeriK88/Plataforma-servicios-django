@@ -3,42 +3,40 @@
 {% block title %}Dashboard de Empresa{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <!-- Título del Dashboard -->
-    <div class="text-center mb-5">
-        <h1 class="display-4 text-primary">Dashboard de Empresa</h1>
-        <p class="lead text-muted">Gestiona tus reservas y servicios de forma eficiente.</p>
-    </div>
+    <div class="container mt-5">
+        <!-- Título del Dashboard -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">Dashboard de Empresa</h1>
+            <p class="lead text-muted">Gestiona tus reservas y servicios de forma eficiente.</p>
+        </div>
 
-    <!-- Sección de Reservas Pendientes -->
-    <section class="mb-5">
-        <h2 class="text-secondary text-center text-md-left mb-4">Reservas Pendientes</h2>
-        <div class="row">
-            {% for booking in pending_bookings %}
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card shadow-lg border-0 h-100">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Cliente: {{ booking.user.username }}</h5>
-                            <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
-                            <p><strong>Fecha:</strong> {{ booking.date|date:"d M Y - H:i" }}</p>
-                            <a href="{% url 'confirm_booking' booking.id %}" class="btn btn-success btn-block mt-3">Confirmar</a>
+        <!-- Sección de Reservas Pendientes -->
+        <section class="mb-5">
+            <h2 class="text-secondary text-center text-md-left mb-4">Reservas Pendientes</h2>
+            <div class="row">
+                {% for booking in pending_bookings %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-lg border-0 h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-success">Cliente: {{ booking.user.username }}</h5>
+                                <p><strong>Servicio:</strong> {{ booking.service.name }}</p>
+                                <p><strong>Fecha:</strong> {{ booking.date|date:"d M Y - H:i" }}</p>
+                                <!-- Botones de Confirmar y Rechazar -->
+                                <div class="d-flex flex-column gap-2 mt-3">
+                                    <a href="{% url 'confirm_booking' booking.id %}" class="btn btn-success btn-block">Confirmar</a>
+                                    <a href="{% url 'reject_booking' booking.id %}" class="btn btn-danger btn-block">Rechazar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% empty %}
-                <div class="col-12">
-                    <div class="card shadow-sm p-4 text-center">
-                        <p class="text-muted m-0">No tienes reservas pendientes.</p>
+                {% empty %}
+                    <div class="col-12">
+                        <div class="card shadow-sm p-4 text-center">
+                            <p class="text-muted m-0">No tienes reservas pendientes.</p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-
-    <!-- Botón para Agregar Nuevo Servicio -->
-    <div class="text-center">
-        <a href="{% url 'service_create' %}" class="btn btn-outline-primary btn-lg">Añadir Nuevo Servicio</a>
+                {% endfor %}
+            </div>
+        </section>
     </div>
-</div>
 {% endblock %}

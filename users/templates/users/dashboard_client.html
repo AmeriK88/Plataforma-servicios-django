@@ -9,7 +9,7 @@
         <p class="lead text-muted">Revisa tus citas activas y servicios recomendados.</p>
     </div>
 
-    <!-- Notificaciones -->
+    <!-- Notificaciones del Cliente -->
     <section class="mt-5">
         <h2 class="text-secondary">Notificaciones</h2>
         <ul class="list-group">
@@ -23,8 +23,8 @@
             {% endfor %}
         </ul>
     </section>
-    
 
+    <!-- Reservas Activas del Cliente -->
     <h2 class="section-title text-secondary">Mis Reservas Activas</h2>
     <div class="row">
         {% for booking in active_bookings %}
@@ -44,18 +44,5 @@
             </div>
         {% endfor %}
     </div>
-
-    <h2 class="section-title text-secondary mt-5">Servicios Recomendados</h2>
-    <ul class="list-group mb-3">
-        {% for service in recommended_services %}
-            <li class="list-group-item">
-                <h5 class="text-primary">{{ service.name }}</h5>
-                <p>{{ service.description|truncatewords:20 }}</p>
-                <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary btn-sm">Ver Servicio</a>
-            </li>
-        {% empty %}
-            <li class="list-group-item">No hay servicios recomendados en este momento.</li>
-        {% endfor %}
-    </ul>
 </div>
 {% endblock %}
