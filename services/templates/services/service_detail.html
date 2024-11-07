@@ -16,19 +16,29 @@
             <h5 class="text-secondary"><i class="fas fa-info-circle"></i> Descripción del Servicio</h5>
             <p class="text-muted">{{ service.description }}</p>
 
-            <!-- Precio y Botón de Reserva -->
+            <!-- Precio y Botones de Acciones -->
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <span class="h4 text-success font-weight-bold">
                     <i class="fas fa-euro-sign"></i> Precio: {{ service.price }} €
                 </span>
 
-                {% if user.is_authenticated and user != service.provider %}
-                    <!-- Mostrar el botón de reserva solo si el usuario autenticado no es el proveedor del servicio -->
-                    <a href="{% url 'booking_create' service.id %}" class="btn btn-primary btn-lg">
+                {% if user.is_authenticated %}
+                    {% if user != service.provider %}
+                        <!-- Botón de reserva si el usuario autenticado no es el proveedor del servicio -->
+                        <a href="{% url 'booking_create' service.id %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calendar-plus"></i> Reservar este servicio
+                        </a>
+                    {% else %}
+                        <!-- Botón de edición si el usuario es el proveedor del servicio -->
+                        <a href="{% url 'service_update' service.id %}" class="btn btn-warning btn-lg">
+                            <i class="fas fa-edit"></i> Editar este servicio
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <!-- Botón de reserva para usuarios no autenticados, redirige al login -->
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
                         <i class="fas fa-calendar-plus"></i> Reservar este servicio
                     </a>
-                {% else %}
-                    <span class="text-muted"><i class="fas fa-user-shield"></i> Eres el proveedor de este servicio</span>
                 {% endif %}
             </div>
         </div>

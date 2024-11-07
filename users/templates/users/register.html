@@ -12,12 +12,35 @@
     <div class="card shadow-lg border-0 p-4 mt-4">
         <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
+            
+            <!-- Errores del formulario -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <!-- Campos del formulario -->
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary btn-lg w-100">
+            
+            <!-- Botón de envío -->
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
                 <i class="fas fa-user-check"></i> Registrarse
             </button>
         </form>
-        <p class="text-center mt-3">¿Ya tienes una cuenta? 
+        
+        <!-- Enlace a inicio de sesión -->
+        <p class="text-center mt-3">
+            ¿Ya tienes una cuenta? 
             <a href="{% url 'login' %}" class="text-primary">
                 <i class="fas fa-sign-in-alt"></i> Inicia sesión aquí
             </a>

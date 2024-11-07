@@ -13,6 +13,8 @@ from services.models import Service
 from django.utils import timezone
 from bookings.models import Booking
 from notifications.models import Notification
+from django.contrib import messages
+from django.contrib.auth import logout
 
 
 def home(request):
@@ -31,6 +33,7 @@ class SignUpView(CreateView):
             user.is_client = True
         user.save()
         login(self.request, user)
+        messages.success(self.request, "¡Registro exitoso! Bienvenido a la plataforma.")
         return redirect('profile')
 
 # Vista para el inicio de sesión
@@ -40,10 +43,18 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, "Has iniciado sesión exitosamente.")
             return HttpResponseRedirect(reverse('profile'))
+        else:
+            messages.error(request, "Credenciales incorrectas. Inténtalo de nuevo.")
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Has cerrado sesión exitosamente.")
+    return redirect('home')
 
 # Vista para el perfil de usuario (requiere inicio de sesión)
 @login_required
@@ -121,7 +132,10 @@ def edit_profile(request):
         form = ProfileEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Información actualizada exitosamente.")
             return redirect('profile')
+        else:
+            messages.error(request, "Hubo un error al actualizar el perfil. Inténtalo de nuevo.") 
     else:
         form = ProfileEditForm(instance=request.user)
 

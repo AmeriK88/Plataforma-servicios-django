@@ -5,6 +5,8 @@ from .forms import ServiceForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 def service_list(request):
     # Verifica si el usuario está autenticado
@@ -33,17 +35,20 @@ def service_create(request):
             service = form.save(commit=False)
             service.provider = request.user  
             service.save()
+            messages.success(request, 'Servicio creado exitosamente.')
             return redirect('service_list')
     else:
         form = ServiceForm()
     return render(request, 'services/service_form.html', {'form': form})
 
+@login_required
 def service_update(request, pk):
     service = get_object_or_404(Service, pk=pk)
     if request.method == 'POST':
         form = ServiceForm(request.POST, instance=service)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Servicio actualizado exitosamente.')
             return redirect('service_detail', pk=pk)
     else:
         form = ServiceForm(instance=service)

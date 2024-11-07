@@ -33,7 +33,10 @@ def booking_create(request, service_id):
             booking.service = service    
             booking.status = 'pending'
             booking.save()
+            messages.success(request, "Reserva creada exitosamente.")
             return redirect('dashboard')
+        else:
+            messages.error(request, "Hubo un error al crear la reserva. Inténtalo de nuevo.")
     else:
         form = BookingForm()
 
