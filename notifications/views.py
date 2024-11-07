@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Notification
 
 def notification_list(request):
-    # Solo notificaciones no leídas en la lista
     notifications = Notification.objects.filter(user=request.user, is_read=False)
+    print("Notificaciones en la lista:", notifications)
     return render(request, 'notifications/notification_list.html', {'notifications': notifications})
 
 
@@ -20,6 +20,8 @@ def mark_as_read(request, pk):
     if not notification.is_read:
         notification.is_read = True
         notification.save()
-    return redirect('notification_list')  
+    return redirect('notification_list')
+ 
+
 
 

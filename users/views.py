@@ -55,10 +55,9 @@ def profile_view(request):
         offered_services = user.services.all()
         company_bookings = Booking.objects.filter(service__in=offered_services)
         pending_count = company_bookings.filter(status='pending').count()
-        
-        # Mostrar solo notificaciones no leídas
         notifications = Notification.objects.filter(user=user, is_read=False)
-        
+        print("Notificaciones no leídas (empresa):", notifications)
+
         return render(request, 'users/profile_company.html', {
             'user': user,
             'offered_services': offered_services,
@@ -70,23 +69,23 @@ def profile_view(request):
         # Lógica para el perfil del cliente
         past_bookings = user.client_bookings.filter(date__lt=timezone.now())
         
-        # Filtra las notificaciones no leídas para el cliente
+        # Filtrar las notificaciones no leídas
         notifications = Notification.objects.filter(user=user, is_read=False)
-        
-        # Si deseas eliminar duplicados por mensaje:
+        print("Notificaciones no leídas (cliente):", notifications)
+
+        # Verificar si hay duplicados de notificación y eliminarlos
         unique_notifications = []
         seen_messages = set()
         for notification in notifications:
             if notification.message not in seen_messages:
                 unique_notifications.append(notification)
                 seen_messages.add(notification.message)
-        
+
         return render(request, 'users/profile_client.html', {
             'user': user,
             'past_bookings': past_bookings,
             'notifications': unique_notifications,
         })
-
 
     
 @login_required
