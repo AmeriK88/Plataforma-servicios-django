@@ -53,7 +53,7 @@ def profile_view(request):
     if user.is_company:
         # Lógica para el perfil de la empresa
         offered_services = user.services.all()
-        company_bookings = Booking.objects.filter(service__in=offered_services)
+        company_bookings = Booking.objects.filter(service__in=offered_services).order_by('-date')
         pending_count = company_bookings.filter(status='pending').count()
         notifications = Notification.objects.filter(user=user, is_read=False)
         print("Notificaciones no leídas (empresa):", notifications)
