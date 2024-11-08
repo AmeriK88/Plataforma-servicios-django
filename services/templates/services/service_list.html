@@ -19,7 +19,7 @@
                             <i class="fas fa-concierge-bell"></i>
                             <a href="{% url 'service_detail' service.id %}" class="text-decoration-none">{{ service.name }}</a>
                         </h5>
-                        <p class="card-text text-muted">{{ service.description|truncatewords:20 }}</p>
+                        <p class="card-text text-muted">{{ service.description|linebreaksbr }}</p>
                         <p class="font-weight-bold text-secondary">
                             <i class="fas fa-euro-sign"></i> Precio: {{ service.price }} €
                         </p>

@@ -49,7 +49,7 @@
                         <h5 class="card-title text-primary">
                             <i class="fas fa-briefcase"></i> {{ service.name }}
                         </h5>
-                        <p class="card-text">{{ service.description|truncatewords:15 }}</p>
+                        <p class="card-text">{{ service.description|linebreaksbr }}</p>
                         <p class="font-weight-bold">
                             <i class="fas fa-euro-sign"></i> Precio: {{ service.price }} €
                         </p>
