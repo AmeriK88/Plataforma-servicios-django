@@ -216,6 +216,13 @@ footer p {
     border-color: #bce8f1;
 }
 
+.alert-danger {
+    background-color: var(--color-accent); /* Usa el rojo coral que has definido */
+    color: #fff;
+    border-color: var(--color-accent);
+}
+
+
 /* Estilo de Encabezados y Subtítulos */
 .header-title {
     color: var(--color-text-dark) !important;
