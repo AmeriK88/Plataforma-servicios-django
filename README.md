@@ -36,9 +36,6 @@ Los clientes pueden registrarse, iniciar sesión, navegar por los servicios, res
 ### Empresas
 Las empresas pueden registrarse, crear servicios, gestionar reservas de clientes y recibir notificaciones en tiempo real.
 
-## Capturas de Pantalla
-_Añade aquí capturas de pantalla de la aplicación en funcionamiento para mostrar sus funcionalidades principales._
-
 ## Tecnologías Utilizadas
 
 - **Django**: Framework web principal.
@@ -46,6 +43,17 @@ _Añade aquí capturas de pantalla de la aplicación en funcionamiento para most
 - **SQLite/PostgreSQL**: Base de datos (ajustable según las necesidades de producción).
 - **HTML/CSS/JavaScript**: Estructura y diseño del frontend.
 - **jQuery y Flatpickr**: Mejoras de usabilidad en el frontend.
+- 
+## Capturas de Pantalla
+![Captura de pantalla 2024-11-10 205340](https://github.com/user-attachments/assets/fcacd33e-65a3-4a94-9cf0-dcdfa6d44904)
+![Captura de pantalla 2024-11-10 205331](https://github.com/user-attachments/assets/8900152d-5428-4e1e-8c0b-f54f37a7b0fb)
+![Captura de pantalla 2024-11-10 205315](https://github.com/user-attachments/assets/5bca0385-0ec5-41ee-be37-28a4f74ac3e2)
+![Captura de pantalla 2024-11-10 205226](https://github.com/user-attachments/assets/9f2bbd1f-966b-4c4e-8fef-6065b63bcd4d)
+![Captura de pantalla 2024-11-10 205154](https://github.com/user-attachments/assets/8596da04-0a55-4364-b961-8969e82d5904)
+![Captura de pantalla 2024-11-10 205147](https://github.com/user-attachments/assets/47af440e-9433-4352-be2e-1a06ac8441d5)
+![Captura de pantalla 2024-11-10 205106](https://github.com/user-attachments/assets/fb6608e4-e022-467c-bb59-493868dbacc1)
+![Captura de pantalla 2024-11-10 205051](https://github.com/user-attachments/assets/77a15364-c10e-4491-8eae-dcf877679b2e)
+![Captura de pantalla 2024-11-10 205004](https://github.com/user-attachments/assets/4996cc58-cef2-47bc-9161-2a07876cc3b4)
 
 ## Estructura del Proyecto
 
